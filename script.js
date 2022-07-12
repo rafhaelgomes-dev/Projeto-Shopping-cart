@@ -1,5 +1,6 @@
 const classItems = document.getElementsByClassName('items')[0];
 const olClassCart = document.getElementsByClassName('cart__items')[0];
+
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -38,7 +39,8 @@ const createProductItemElement = ({ sku, name, image }) => {
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
 const cartItemClickListener = (event) => {
-  // coloque seu código aqui
+  const li = event.target;
+  li.remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
