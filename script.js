@@ -1,9 +1,13 @@
 const classItems = document.getElementsByClassName('items')[0];
 const olClassCart = document.getElementsByClassName('cart__items')[0];
 const buttonLimpar = document.getElementsByClassName('empty-cart')[0];
+const h3 = document.getElementsByClassName('total-price')[0];
 buttonLimpar.addEventListener('click', () => {
   olClassCart.innerText = '';
 });
+let valorTotal = 0;
+let valorParaSubtrair = 0;
+let valorTotalFinal = 0;
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -42,8 +46,13 @@ const createProductItemElement = ({ sku, name, image }) => {
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
+
+
 const cartItemClickListener = (event) => {
   const li = event.target;
+  const valorSubtraido = valorTotalFinal - valorParaSubtrair;
+  valorTotalFinal = valorSubtraido;
+  h3.innerText = Math.round(valorSubtraido * 100) / 100;
   li.remove();
 };
 
@@ -52,7 +61,15 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
+  valorParaSubtrair = salePrice;
   olClassCart.appendChild(li);
+};
+
+const calculaValorTotal = (valor) => {
+   valorTotal += valor;
+   const valorFinal = Math.round(valorTotal * 100) / 100;
+   valorTotalFinal = valorFinal;
+   h3.innerText = `R$ ${valorFinal}`;
 };
 
 const capturaProdutoSelecionado = async (index) => {
@@ -63,7 +80,9 @@ const capturaProdutoSelecionado = async (index) => {
     name: produtoSelecionado.title,
     salePrice: produtoSelecionado.price,
   };
+  const valor = produtoSelecionado.price;
   createCartItemElement(obj);
+  calculaValorTotal(valor);
 };
 
 const capturaIndexDoProduto = () => {
