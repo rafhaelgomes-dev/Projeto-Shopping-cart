@@ -1,5 +1,9 @@
 const classItems = document.getElementsByClassName('items')[0];
 const olClassCart = document.getElementsByClassName('cart__items')[0];
+const buttonLimpar = document.getElementsByClassName('empty-cart')[0];
+buttonLimpar.addEventListener('click', () => {
+  olClassCart.innerText = '';
+})
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
