@@ -4,10 +4,9 @@ const buttonLimpar = document.getElementsByClassName('empty-cart')[0];
 const h3 = document.getElementsByClassName('total-price')[0];
 buttonLimpar.addEventListener('click', () => {
   olClassCart.innerText = '';
+  h3.innerText = 'R$ 0,00';
 });
 let valorTotal = 0;
-let valorParaSubtrair = 0;
-let valorTotalFinal = 0;
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
