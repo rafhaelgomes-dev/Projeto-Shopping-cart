@@ -4,9 +4,10 @@ const buttonLimpar = document.getElementsByClassName('empty-cart')[0];
 const h3 = document.getElementsByClassName('total-price')[0];
 buttonLimpar.addEventListener('click', () => {
   olClassCart.innerText = '';
-  h3.innerText = 'R$ 0,00';
 });
 let valorTotal = 0;
+let valorParaSubtrair = 0;
+let valorTotalFinal = 0;
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -45,10 +46,22 @@ const createProductItemElement = ({ sku, name, image }) => {
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
+const calculaValorParaSubtrair = () => {
+  const olClassCart2 = document.querySelectorAll('.cart__item');
+  const precos = [];
+ const value = olClassCart2.forEach((element) => {
+    const array = element.innerText.split('$');
+    precos.push(array[array.length - 1]);
+  })
+  return precos[precos.length - 2];
+};
+
 const cartItemClickListener = (event) => {
   const li = event.target;
   const valorSubtraido = valorTotalFinal - valorParaSubtrair;
   valorTotalFinal = valorSubtraido;
+  valorTotal -= valorParaSubtrair;
+  valorParaSubtrair = calculaValorParaSubtrair();
   h3.innerText = Math.round(valorSubtraido * 100) / 100;
   li.remove();
 };
