@@ -46,8 +46,6 @@ const createProductItemElement = ({ sku, name, image }) => {
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
-
-
 const cartItemClickListener = (event) => {
   const li = event.target;
   const valorSubtraido = valorTotalFinal - valorParaSubtrair;
