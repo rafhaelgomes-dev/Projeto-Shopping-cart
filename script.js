@@ -52,7 +52,7 @@ const calculaValorParaSubtrair = () => {
  const value = olClassCart2.forEach((element) => {
     const array = element.innerText.split('$');
     precos.push(array[array.length - 1]);
-  })
+  });
   return precos[precos.length - 2];
 };
 
