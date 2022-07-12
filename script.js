@@ -51,18 +51,6 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   olClassCart.appendChild(li);
 };
 
-const updateCart = () => {
-  const dbProdutos = getSavedCartItems();
-  dbProdutos.forEach((elemento) => {
-    const obj = {
-      sku: elemento.sku,
-      name: elemento.name,
-      salePrice: elemento.salePrice,
-    };
-    createCartItemElement(obj);
-  });
-};
-
 const capturaProdutoSelecionado = async (index) => {
   const idDoproduto = computadores[index].id;
   const produtoSelecionado = await fetchItem(idDoproduto);
@@ -71,9 +59,7 @@ const capturaProdutoSelecionado = async (index) => {
     name: produtoSelecionado.title,
     salePrice: produtoSelecionado.price,
   };
-  saveCartItems(obj);
-  olClassCart.innerText = '';
-       updateCart();
+  createCartItemElement(obj);
 };
 
 const capturaIndexDoProduto = () => {
@@ -108,6 +94,4 @@ const addproductCart = () => {
 
 window.onload = () => { 
   addproductlist();
-  olClassCart.innerText = '';
-  updateCart();
 };
