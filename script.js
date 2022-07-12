@@ -5,9 +5,6 @@ const h3 = document.getElementsByClassName('total-price')[0];
 buttonLimpar.addEventListener('click', () => {
   olClassCart.innerText = '';
 });
-let valorTotal = 0;
-let valorParaSubtrair = 0;
-let valorTotalFinal = 0;
 
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
@@ -46,24 +43,24 @@ const createProductItemElement = ({ sku, name, image }) => {
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
-const calculaValorParaSubtrair = () => {
+const calculaValorTotal = () => {
   const olClassCart2 = document.querySelectorAll('.cart__item');
   const precos = [];
- const value = olClassCart2.forEach((element) => {
+  let valorFinal = 0;
+  olClassCart2.forEach((element) => {
     const array = element.innerText.split('$');
     precos.push(array[array.length - 1]);
   });
-  return precos[precos.length - 2];
+  precos.forEach((element) => {
+    valorFinal += Math.round(element * 100) / 100;
+  });
+  h3.innerText = valorFinal;
 };
 
 const cartItemClickListener = (event) => {
   const li = event.target;
-  const valorSubtraido = valorTotalFinal - valorParaSubtrair;
-  valorTotalFinal = valorSubtraido;
-  valorTotal -= valorParaSubtrair;
-  valorParaSubtrair = calculaValorParaSubtrair();
-  h3.innerText = Math.round(valorSubtraido * 100) / 100;
   li.remove();
+  calculaValorTotal();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -73,13 +70,6 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   li.addEventListener('click', cartItemClickListener);
   valorParaSubtrair = salePrice;
   olClassCart.appendChild(li);
-};
-
-const calculaValorTotal = (valor) => {
-   valorTotal += valor;
-   const valorFinal = Math.round(valorTotal * 100) / 100;
-   valorTotalFinal = valorFinal;
-   h3.innerText = `R$ ${valorFinal}`;
 };
 
 const capturaProdutoSelecionado = async (index) => {
@@ -92,7 +82,7 @@ const capturaProdutoSelecionado = async (index) => {
   };
   const valor = produtoSelecionado.price;
   createCartItemElement(obj);
-  calculaValorTotal(valor);
+  calculaValorTotal();
 };
 
 const capturaIndexDoProduto = () => {
@@ -125,6 +115,7 @@ const addproductCart = () => {
 
 };
 
-window.onload = () => { 
-  addproductlist();
+window.onload = async () => { 
+ await addproductlist();
+ calculaValorTotal();
 };
