@@ -153,3 +153,10 @@ h3 {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.cart__item {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}

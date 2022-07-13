@@ -4,6 +4,7 @@ const buttonLimpar = document.getElementsByClassName('empty-cart')[0];
 const h3 = document.getElementsByClassName('total-price')[0];
 buttonLimpar.addEventListener('click', () => {
   olClassCart.innerText = '';
+  h3.innerText = 'R$ 0,00';
 });
 
 const createProductImageElement = (imageSource) => {
@@ -41,8 +42,6 @@ const createProductItemElement = ({ sku, name, image }) => {
   return section;
 };
 
-const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
-
 const calculaValorTotal = () => {
   const olClassCart2 = document.querySelectorAll('.cart__item');
   const precos = [];
@@ -54,7 +53,7 @@ const calculaValorTotal = () => {
   precos.forEach((element) => {
     valorFinal += Math.round(element * 100) / 100;
   });
-  h3.innerText = valorFinal;
+  h3.innerText = `R$ ${valorFinal}`;
 };
 
 const cartItemClickListener = (event) => {
@@ -66,7 +65,7 @@ const cartItemClickListener = (event) => {
 const createCartItemElement = ({ sku, name, salePrice }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  li.innerHTML = `<img src="${sku}"> ${name} | Preço: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
   valorParaSubtrair = salePrice;
   olClassCart.appendChild(li);
@@ -76,11 +75,10 @@ const capturaProdutoSelecionado = async (index) => {
   const idDoproduto = computadores[index].id;
   const produtoSelecionado = await fetchItem(idDoproduto);
   const obj = {
-    sku: produtoSelecionado.id,
+    sku: produtoSelecionado.thumbnail,
     name: produtoSelecionado.title,
     salePrice: produtoSelecionado.price,
   };
-  const valor = produtoSelecionado.price;
   createCartItemElement(obj);
   calculaValorTotal();
 };
@@ -109,10 +107,6 @@ const addproductlist = async () => {
     buttonAddCart.id = index;
   });
   capturaIndexDoProduto();
-};
-
-const addproductCart = () => {
-
 };
 
 window.onload = async () => { 
