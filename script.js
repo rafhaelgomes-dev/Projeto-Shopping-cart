@@ -57,7 +57,11 @@ const calculaValorTotal = () => {
 };
 
 const cartItemClickListener = (event) => {
-  const li = event.target.parentElement;
+  const li = event.target.parentNode;
+  console.log(li)
+  if(li.className === 'cart__items') {
+    return 
+    }
   li.remove();
   calculaValorTotal();
 };
