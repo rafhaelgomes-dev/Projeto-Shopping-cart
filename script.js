@@ -51,9 +51,9 @@ const calculaValorTotal = () => {
     precos.push(array[array.length - 1]);
   });
   precos.forEach((element) => {
-    valorFinal += Math.round(element);
+    valorFinal += Number(element);
   });
-  h3.innerText = `R$ ${valorFinal}`;
+  h3.innerText = `R$ ${valorFinal.toFixed(2)}`;
 };
 
 const cartItemClickListener = (event) => {
