@@ -51,13 +51,13 @@ const calculaValorTotal = () => {
     precos.push(array[array.length - 1]);
   });
   precos.forEach((element) => {
-    valorFinal += Math.round(element * 100) / 100;
+    valorFinal += Math.round(element);
   });
   h3.innerText = `R$ ${valorFinal}`;
 };
 
 const cartItemClickListener = (event) => {
-  const li = event.target;
+  const li = event.target.parentElement;
   li.remove();
   calculaValorTotal();
 };
@@ -65,7 +65,7 @@ const cartItemClickListener = (event) => {
 const createCartItemElement = ({ sku, name, salePrice }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
-  li.innerHTML = `<img src="${sku}"> ${name} | Preço: $${salePrice}`;
+  li.innerHTML = `<img src="${sku}"> <P>${name} | Preço: $${salePrice}</p>`;
   li.addEventListener('click', cartItemClickListener);
   valorParaSubtrair = salePrice;
   olClassCart.appendChild(li);
