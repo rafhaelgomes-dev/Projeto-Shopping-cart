@@ -1,16 +1,17 @@
-# 🚧 README em construção 🚧
+# Projeto ShoppingCart
 
-<!-- Olá, Tryber!
+Projeto em JavaScript Vanilha que simula um carrinho de compras, utilizei a API do
+mercado livre para listar os produtos.
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
+<hr></hr>
 
-É essencial que você preencha esse documento por conta própria, ok?
+## 🛠 Habilidades
+JavaScript, HTML, CSS, Jest.
 
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
+<hr></hr>
 
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
+## Utilização
 
--->
+- Para clonar o projeto: `git@github.com:rafhaelgomes-dev/Todo-list-TRYBE.git`.
+
+<hr></hr>
