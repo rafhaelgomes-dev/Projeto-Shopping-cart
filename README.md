@@ -12,6 +12,6 @@ JavaScript, HTML, CSS, Jest.
 
 ## Utilização
 
-- Para clonar o projeto: `git@github.com:rafhaelgomes-dev/Todo-list-TRYBE.git`.
+- Para clonar o projeto: `git@github.com:rafhaelgomes-dev/Shopping-cart.git`.
 
 <hr></hr>
